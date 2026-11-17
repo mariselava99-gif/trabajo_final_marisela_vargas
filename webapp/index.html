@@ -1,11 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Visualización interactiva de departamentos y municipios de Colombia usando servicios WMS y WFS de GeoServer">
-    <meta name="author" content="Curso de Servicios Web Geográficos">
-    <title>Colombia - Departamentos y Municipios | Servicios Web Geográficos</title>
+    <meta name="description" content="Visualización interactiva de los municipios de Boyacá mediante servicios WMS y WFS de GeoServer">
+    <meta name="author" content="Marisela Vargas">
+    <title>Municipios de Boyacá | Servicios Web Geográficos</title>
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -16,35 +17,36 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Encabezado -->
     <header class="header">
         <div class="header-content">
-            <h1>🗺️ Colombia - División Administrativa</h1>
-            <p>Visualización de Departamentos y Municipios mediante Servicios Web Geográficos (WMS/WFS)</p>
+            <h1>🗺️ Municipios de Boyacá</h1>
+            <p>Visualización geográfica interactiva mediante servicios web geográficos WMS y WFS</p>
         </div>
     </header>
 
     <!-- Contenedor principal -->
     <div class="main-container">
+
         <!-- Panel lateral -->
         <aside class="sidebar">
+
             <div class="sidebar-section">
                 <h2>📊 Información</h2>
                 <div id="info-panel">
-                    <p><strong>Capas disponibles:</strong></p>
+                    <p><strong>Capa disponible:</strong></p>
                     <ul>
-                        <li>Departamentos (33)</li>
-                        <li>Municipios (~1100)</li>
+                        <li>Municipios de Boyacá</li>
                     </ul>
                     <p class="info-text">
-                        Haz clic en el mapa para ver información detallada de cada departamento.
+                        Selecciona un municipio en el mapa para consultar su información geográfica.
                     </p>
                 </div>
             </div>
 
             <div class="sidebar-section">
                 <h2>🔍 Búsqueda</h2>
-                <input type="text" id="search-input" placeholder="Buscar departamento..." class="search-input">
+                <input type="text" id="search-input" placeholder="Buscar municipio..." class="search-input">
                 <button id="search-button" class="btn-primary">Buscar</button>
                 <div id="search-results"></div>
             </div>
@@ -52,23 +54,25 @@
             <div class="sidebar-section">
                 <h2>ℹ️ Acerca de</h2>
                 <p class="small-text">
-                    <strong>Fuente de datos:</strong> Instituto Geográfico Agustín Codazzi (IGAC)<br>
-                    <strong>Servidor:</strong> GeoServer<br>
-                    <strong>Estándares:</strong> OGC WMS, WFS<br>
+                    <strong>Área de estudio:</strong> Departamento de Boyacá<br>
+                    <strong>Fuente de datos:</strong> GeoServer<br>
+                    <strong>Estándares:</strong> OGC WMS y WFS<br>
                     <strong>Biblioteca:</strong> Leaflet.js
                 </p>
             </div>
+
         </aside>
 
         <!-- Mapa -->
         <main class="map-container">
             <div id="map"></div>
         </main>
+
     </div>
 
-    <!-- Footer -->
+    <!-- Pie de página -->
     <footer class="footer">
-        <p>&copy; 2024 Curso de Servicios Web Geográficos | Desarrollado con Leaflet.js y GeoServer</p>
+        <p>&copy; 2026 | Aplicación web SIG desarrollada con Leaflet.js y GeoServer</p>
     </footer>
 
     <!-- Leaflet JavaScript -->

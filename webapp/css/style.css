@@ -1,4 +1,8 @@
-/* Reset y estilos base */
+
+/* ==========================================
+   1. RESET Y ESTILOS GENERALES
+   ========================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -12,12 +16,15 @@ body {
     line-height: 1.6;
 }
 
-/* Header */
+/* ==========================================
+   2. ENCABEZADO
+   ========================================== */
+
 .header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 1.5rem 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .header-content h1 {
@@ -31,23 +38,32 @@ body {
     opacity: 0.9;
 }
 
-/* Contenedor principal */
+/* ==========================================
+   3. CONTENEDOR PRINCIPAL
+   ========================================== */
+
 .main-container {
     display: flex;
     height: calc(100vh - 140px);
+    min-height: 500px;
 }
 
-/* Sidebar */
+/* ==========================================
+   4. PANEL LATERAL
+   ========================================== */
+
 .sidebar {
     width: 320px;
+    flex-shrink: 0;
     background-color: white;
     padding: 1.5rem;
     overflow-y: auto;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-section {
     margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .sidebar-section h2 {
@@ -88,7 +104,10 @@ body {
     line-height: 1.8;
 }
 
-/* Búsqueda */
+/* ==========================================
+   5. BUSCADOR
+   ========================================== */
+
 .search-input {
     width: 100%;
     padding: 0.75rem;
@@ -144,9 +163,13 @@ body {
     background-color: #e9ecef;
 }
 
-/* Contenedor del mapa */
+/* ==========================================
+   6. CONTENEDOR DEL MAPA
+   ========================================== */
+
 .map-container {
     flex: 1;
+    min-width: 0;
     position: relative;
 }
 
@@ -155,7 +178,10 @@ body {
     height: 100%;
 }
 
-/* Footer */
+/* ==========================================
+   7. PIE DE PÁGINA
+   ========================================== */
+
 .footer {
     background-color: #2c3e50;
     color: white;
@@ -164,10 +190,13 @@ body {
     font-size: 0.9rem;
 }
 
-/* Estilos de Leaflet personalizados */
+/* ==========================================
+   8. VENTANAS EMERGENTES DE LEAFLET
+   ========================================== */
+
 .leaflet-popup-content-wrapper {
     border-radius: 8px;
-    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
 }
 
 .leaflet-popup-content {
@@ -196,13 +225,15 @@ body {
     margin: 0.75rem 0;
 }
 
-/* Control de información personalizado */
+/* ==========================================
+   9. PANEL DE INFORMACIÓN DEL MAPA
+   ========================================== */
+
 .info-control {
     padding: 10px 15px;
     font: 14px/16px Arial, sans-serif;
-    background: white;
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     min-width: 200px;
 }
@@ -223,15 +254,17 @@ body {
     color: #333;
 }
 
-/* Leyenda */
+/* ==========================================
+   10. LEYENDA CARTOGRÁFICA
+   ========================================== */
+
 .legend {
     line-height: 18px;
     color: #555;
-    background: white;
-    background: rgba(255,255,255,0.95);
+    background: rgba(255, 255, 255, 0.95);
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .legend h4 {
@@ -248,9 +281,12 @@ body {
     border: 1px solid #999;
 }
 
-/* Control de capas personalizado */
+/* ==========================================
+   11. CONTROL DE CAPAS
+   ========================================== */
+
 .leaflet-control-layers {
-    border: 2px solid rgba(0,0,0,0.2);
+    border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     background: white;
 }
@@ -259,48 +295,138 @@ body {
     padding: 10px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .main-container {
-        flex-direction: column;
-        height: auto;
-    }
+/* ==========================================
+   12. DISEÑO RESPONSIVE - TABLETAS
+   ========================================== */
+
+@media (max-width: 992px) {
 
     .sidebar {
-        width: 100%;
-        max-height: 300px;
+        width: 280px;
+        padding: 1rem;
     }
 
-    .map-container {
-        height: 500px;
+    .header {
+        padding: 1.2rem;
+    }
+}
+
+/* ==========================================
+   13. DISEÑO RESPONSIVE - CELULARES
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    .header {
+        padding: 1rem;
     }
 
     .header-content h1 {
-        font-size: 1.4rem;
+        font-size: 1.35rem;
     }
 
     .header-content p {
         font-size: 0.85rem;
     }
+
+    .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 0;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-height: none;
+        padding: 1rem;
+        overflow: visible;
+    }
+
+    .sidebar-section {
+        margin-bottom: 1.2rem;
+    }
+
+    .map-container {
+        width: 100%;
+        height: 65vh;
+        min-height: 400px;
+    }
+
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+
+    .footer {
+        font-size: 0.8rem;
+    }
+
+    .info-control {
+        min-width: 150px;
+        max-width: 190px;
+        font-size: 12px;
+    }
+
+    .leaflet-control-layers {
+        max-width: 180px;
+        font-size: 12px;
+    }
 }
 
-/* Animaciones */
+/* ==========================================
+   14. DISEÑO RESPONSIVE - CELULARES PEQUEÑOS
+   ========================================== */
+
+@media (max-width: 480px) {
+
+    .header-content h1 {
+        font-size: 1.15rem;
+    }
+
+    .header-content p {
+        font-size: 0.8rem;
+    }
+
+    .sidebar {
+        padding: 0.85rem;
+    }
+
+    .map-container {
+        height: 60vh;
+        min-height: 350px;
+    }
+
+    .leaflet-control-layers {
+        max-width: 155px;
+        font-size: 11px;
+    }
+
+    .footer {
+        padding: 0.8rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* ==========================================
+   15. ANIMACIONES
+   ========================================== */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.sidebar-section {
-    animation: fadeIn 0.5s ease-in-out;
-}
+/* ==========================================
+   16. BARRA DE DESPLAZAMIENTO
+   ========================================== */
 
-/* Scrollbar personalizado para sidebar */
 .sidebar::-webkit-scrollbar {
     width: 8px;
 }

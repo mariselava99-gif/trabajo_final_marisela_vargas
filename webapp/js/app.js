@@ -217,6 +217,40 @@ L.control.scale({
 }).addTo(map);
 
 // ============================================
+// LEYENDA CARTOGRÁFICA
+// ============================================
+
+const leyenda = L.control({
+    position: 'bottomright'
+});
+
+leyenda.onAdd = function() {
+    const div = L.DomUtil.create('div', 'info legend');
+
+    div.innerHTML = `
+        <strong>Leyenda</strong>
+        <div style="display:flex; align-items:center; margin-top:8px;">
+            <span style="
+                display:inline-block;
+                width:20px;
+                height:14px;
+                background:#62a5d8;
+                border:2px solid #24476b;
+                margin-right:8px;">
+            </span>
+            Municipios de Boyacá
+        </div>
+        <small style="display:block; margin-top:6px;">
+            Fuente: GeoServer
+        </small>
+    `;
+
+    return div;
+};
+
+leyenda.addTo(map);
+
+// ============================================
 // BÚSQUEDA DE MUNICIPIOS
 // ============================================
 
