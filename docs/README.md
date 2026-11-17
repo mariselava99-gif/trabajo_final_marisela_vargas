@@ -1,242 +1,148 @@
-# Aplicación Web - Visualización de Departamentos y Municipios de Colombia
+# Aplicación Web SIG – Visualización de los Municipios de Boyacá
 
-Esta es una aplicación web interactiva que consume servicios WMS y WFS de GeoServer para visualizar la división administrativa de Colombia.
+## 1. Descripción general
 
-## Características
+Aplicación web geográfica interactiva desarrollada con Leaflet.js y GeoServer para la visualización y consulta de los municipios del departamento de Boyacá, mediante la implementación de servicios web geográficos bajo los estándares OGC WMS y WFS.
 
-- Visualización de departamentos y municipios mediante WMS
-- Búsqueda de departamentos por nombre
-- Información detallada al hacer clic
-- Múltiples capas base (OpenStreetMap, Satélite, CartoDB)
-- Diseño responsive (funciona en móvil y desktop)
-- Interactividad con datos WFS (GeoJSON)
-- Highlight al pasar el mouse
-- Control de escala y capas
+La aplicación permite visualizar información espacial, consultar atributos geográficos, realizar búsquedas por nombre de municipio e interactuar con las entidades representadas en el mapa.
 
-## Requisitos Previos
+## 2. Objetivo
 
-1. **GeoServer** debe estar ejecutándose en `http://localhost:8080/geoserver`
-2. Workspace `taller` creado en GeoServer
-3. Capas `departamentos` y `municipios` publicadas
-4. Datos cargados en PostgreSQL/PostGIS
+Implementar una aplicación web SIG que permita consumir servicios geográficos publicados en GeoServer, integrando información espacial mediante servicios WMS y WFS para facilitar la consulta y visualización de los municipios de Boyacá.
 
-## Estructura de Archivos
+## 3. Características principales
 
-```
+- Visualización geográfica de los municipios de Boyacá.
+- Consumo de servicios WMS de GeoServer.
+- Consumo de servicios WFS mediante datos GeoJSON.
+- Visualización de mapas base OpenStreetMap y Satélite.
+- Búsqueda de municipios por nombre.
+- Consulta de atributos geográficos mediante ventanas emergentes (popups).
+- Resaltado de entidades al pasar el cursor.
+- Selección y acercamiento a los municipios.
+- Panel de información geográfica.
+- Control de capas y escala cartográfica.
+- Leyenda cartográfica.
+- Diseño adaptable a computadores y dispositivos móviles.
+
+## 4. Tecnologías utilizadas
+
+| Tecnología | Aplicación |
+|---|---|
+| HTML5 | Estructura de la aplicación |
+| CSS3 | Diseño y adaptación responsive |
+| JavaScript ES6 | Funcionalidad e interactividad |
+| Leaflet.js 1.9.4 | Visualización cartográfica |
+| GeoServer | Publicación de servicios geográficos |
+| WMS | Visualización de información geográfica |
+| WFS | Consulta y descarga de entidades geográficas |
+| GeoJSON | Representación de datos espaciales |
+| PostgreSQL/PostGIS | Almacenamiento de información geográfica |
+| GitHub Pages | Publicación de la aplicación web |
+
+## 5. Configuración de GeoServer
+
+La aplicación consume una capa geográfica publicada en GeoServer con la siguiente configuración:
+
+- **Workspace:** `boyaca`
+- **Nombre de la capa:** `municipios_boyaca`
+- **Nombre completo:** `boyaca:municipios_boyaca`
+
+### Servicios geográficos
+
+**Servicio WMS:**
+
+`http://localhost:8080/geoserver/boyaca/wms`
+
+**Servicio WFS:**
+
+`http://localhost:8080/geoserver/boyaca/wfs`
+
+Estos servicios se encuentran configurados para ejecución local.
+
+## 6. Estructura de archivos
+
+```text
 webapp/
-├── index.html          # Página principal
+├── index.html
 ├── css/
-│   └── style.css      # Estilos personalizados
+│   └── style.css
 ├── js/
-│   └── app.js         # Lógica de la aplicación
-└── README.md          # Este archivo
+│   └── app.js
+└── README.md
 ```
 
-## Configuración
+La carpeta `docs/` contiene una copia de los archivos de la aplicación utilizada para su publicación mediante GitHub Pages.
 
-### 1. Verificar URLs de GeoServer
+## 7. Instalación y ejecución local
 
-Abre `js/app.js` y verifica las URLs:
+### Requisitos previos
 
-```javascript
-const GEOSERVER_URL = 'http://localhost:8080/geoserver/taller/wms';
-const WFS_URL = 'http://localhost:8080/geoserver/taller/wfs';
+- Python instalado.
+- Docker Desktop en ejecución.
+- GeoServer activo.
+- Capa `boyaca:municipios_boyaca` publicada y habilitada.
+
+### Pasos para ejecutar la aplicación
+
+1. Iniciar Docker Desktop y verificar que el contenedor de GeoServer esté activo.
+2. Confirmar que GeoServer se encuentre disponible en:
+
+   `http://localhost:8080/geoserver/web`
+
+3. Abrir una terminal en la carpeta `webapp`.
+4. Ejecutar el siguiente comando:
+
+```powershell
+py -m http.server 8000
 ```
 
-Si tu GeoServer está en otra dirección o puerto, modifica estas líneas.
+5. Abrir el navegador e ingresar a:
 
-### 2. Verificar Nombres de Capas
+   `http://localhost:8000/index.html`
 
-En `js/app.js`, verifica que los nombres de las capas coincidan con los publicados en GeoServer:
+**Importante:** mantener abierta la terminal mientras se utiliza la aplicación.
 
-```javascript
-const departamentosWMS = L.tileLayer.wms(GEOSERVER_URL, {
-    layers: 'taller:departamentos',  // Formato: workspace:capa
-    ...
-});
-```
+## 8. Pruebas de funcionamiento
 
-## Instalación y Ejecución
+Durante la implementación se realizaron las siguientes pruebas:
 
-### Método 1: Servidor HTTP Simple (Python)
+- Verificación del acceso a GeoServer.
+- Consulta de capacidades del servicio WMS.
+- Consulta de capacidades del servicio WFS.
+- Obtención de entidades geográficas en formato GeoJSON.
+- Visualización de los municipios mediante WMS y WFS.
+- Búsqueda del municipio de Tunja.
+- Consulta de atributos geográficos mediante popups.
+- Verificación de la visualización en dispositivos móviles.
+- Publicación de la aplicación mediante GitHub Pages.
 
-Si tienes Python instalado:
+## 9. Publicación en GitHub Pages
 
-```bash
-# Python 3
-cd webapp
-python -m http.server 8000
+La aplicación se encuentra publicada mediante GitHub Pages.
 
-# Python 2
-python -m SimpleHTTPServer 8000
-```
+**Repositorio:**
 
-Luego abre en el navegador: [http://localhost:8000](http://localhost:8000)
+https://github.com/mariselava99-gif/trabajo_final_marisela_vargas
 
-### Método 2: Node.js http-server
+**Aplicación web:**
 
-Si tienes Node.js:
+https://mariselava99-gif.github.io/trabajo_final_marisela_vargas/
 
-```bash
-# Instalar http-server globalmente
-npm install -g http-server
+La publicación se configuró utilizando la rama `main` y la carpeta `/docs`.
 
-# Ejecutar
-cd webapp
-http-server -p 8000
-```
+**Consideración técnica:** GitHub Pages aloja los archivos de la aplicación, mientras que los servicios WMS y WFS continúan ejecutándose en GeoServer local. Por esta razón, la visualización completa de las capas geográficas requiere que GeoServer esté disponible desde el equipo donde se ejecuta la aplicación.
 
-Abre: [http://localhost:8000](http://localhost:8000)
+## 10. Conclusiones
 
-### Método 3: Abrir Directamente
+El desarrollo permitió integrar una aplicación web cartográfica con servicios geográficos publicados en GeoServer, utilizando los estándares OGC WMS y WFS.
 
-Puedes abrir `index.html` directamente en el navegador, pero es posible que encuentres problemas de CORS al cargar datos desde GeoServer.
+La implementación facilita la visualización, búsqueda y consulta de información espacial de los municipios de Boyacá, integrando herramientas de código abierto para el desarrollo de soluciones SIG basadas en tecnologías web.
 
-**Recomendado**: Usar un servidor HTTP local.
+## 11. Recursos de consulta
 
-## Solución de Problemas
-
-### Error: No se pueden cargar los datos de departamentos
-
-**Causa**: GeoServer no está ejecutándose o las URLs son incorrectas.
-
-**Solución**:
-1. Verifica que GeoServer esté corriendo: [http://localhost:8080/geoserver](http://localhost:8080/geoserver)
-2. Verifica que el workspace `taller` existe
-3. Verifica que las capas `departamentos` y `municipios` están publicadas
-4. Revisa la consola del navegador (F12) para ver errores específicos
-
-### Error de CORS
-
-**Causa**: El navegador bloquea peticiones cross-origin.
-
-**Solución**:
-1. Usa un servidor HTTP local (Python o Node.js)
-2. O configura CORS en GeoServer (ver documentación del Capítulo 8)
-
-### Las capas WMS no se muestran
-
-**Causa**: Nombres de capas incorrectos o GeoServer no responde.
-
-**Solución**:
-1. Verifica los nombres en GeoServer: **Data** → **Layers**
-2. Prueba la URL WMS directamente en el navegador:
-   ```
-   http://localhost:8080/geoserver/taller/wms?service=WMS&request=GetCapabilities
-   ```
-3. Verifica que las capas estén habilitadas (Enabled = ✅)
-
-### La búsqueda no funciona
-
-**Causa**: Los datos WFS no se cargaron correctamente.
-
-**Solución**:
-1. Abre la consola del navegador (F12)
-2. Busca mensajes de error
-3. Verifica que la URL WFS sea correcta
-4. Prueba la URL WFS en el navegador:
-   ```
-   http://localhost:8080/geoserver/taller/wfs?service=WFS&version=2.0.0&request=GetFeature&typeName=taller:departamentos&outputFormat=application/json&count=1
-   ```
-
-## Personalización
-
-### Cambiar Colores
-
-Edita `css/style.css`:
-
-```css
-.header {
-    background: linear-gradient(135deg, #TU_COLOR1 0%, #TU_COLOR2 100%);
-}
-```
-
-### Cambiar Centro del Mapa
-
-Edita `js/app.js`:
-
-```javascript
-const MAP_CONFIG = {
-    center: [latitud, longitud],  // Ej: [4.5709, -74.2973]
-    zoom: 6
-};
-```
-
-### Agregar Más Capas Base
-
-Edita `js/app.js` en la sección `baseLayers`:
-
-```javascript
-const baseLayers = {
-    'Tu Capa': L.tileLayer('URL_DE_TU_CAPA', {
-        attribution: 'Atribución',
-        maxZoom: 19
-    })
-};
-```
-
-### Modificar Estilos de Features
-
-Edita la función `featureStyle` en `js/app.js`:
-
-```javascript
-function featureStyle(feature) {
-    return {
-        fillColor: '#TU_COLOR',    // Color de relleno
-        weight: 2,                  // Grosor del borde
-        opacity: 0.8,              // Opacidad del borde
-        color: '#BORDE_COLOR',     // Color del borde
-        fillOpacity: 0.4           // Opacidad del relleno
-    };
-}
-```
-
-## Despliegue en Producción
-
-### GitHub Pages
-
-1. Sube el código a GitHub
-2. Ve a **Settings** → **Pages**
-3. Selecciona la rama y carpeta `/webapp`
-4. Guarda
-
-**Nota**: Actualiza las URLs de GeoServer a tu servidor público.
-
-### Netlify
-
-1. Arrastra la carpeta `webapp` a [Netlify Drop](https://app.netlify.com/drop)
-2. Tu sitio estará en línea en segundos
-
-### Servidor Propio
-
-1. Copia los archivos a tu servidor web (Apache, Nginx, etc.)
-2. Configura HTTPS
-3. Actualiza las URLs de GeoServer
-
-## Tecnologías Utilizadas
-
-- **Leaflet.js** 1.9.4 - Biblioteca de mapas interactivos
-- **GeoServer** - Servidor de mapas OGC
-- **HTML5/CSS3** - Estructura y estilos
-- **JavaScript ES6** - Lógica de la aplicación
-- **OGC WMS/WFS** - Estándares de servicios web geográficos
-
-## Recursos Adicionales
-
-- [Documentación de Leaflet](https://leafletjs.com/)
-- [Tutoriales de Leaflet](https://leafletjs.com/examples.html)
-- [Documentación de GeoServer](https://docs.geoserver.org/)
-- [Estándares OGC](https://www.ogc.org/standards/)
-
-## Licencia
-
-Este proyecto es parte del Curso de Servicios Web Geográficos y está disponible para fines educativos.
-
-## Autor
-
-Edwin Piragauta Vargas
-Curso de Servicios Web Geográficos - 2025
-
----
-
-**¿Problemas?** Consulta los capítulos del curso o abre la consola del navegador (F12) para ver mensajes de error detallados.
+- Leaflet: https://leafletjs.com/
+- Documentación de Leaflet: https://leafletjs.com/examples.html
+- GeoServer: https://geoserver.org/
+- Documentación de GeoServer: https://docs.geoserver.org/
+- Open Geospatial Consortium (OGC): https://www.ogc.org/
